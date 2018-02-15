@@ -1,0 +1,30 @@
+{
+  "name": "Map Executer",
+  "type": "executer",
+  "exposeRoute": false,
+  "execProgram": "node",
+  "main": "app.js",
+  "version": "1.0.0",
+  "description": "Selecting map to execute",
+  "methods": [
+    {
+      "name": "EXECUTE_MAP",
+      "viewName": "Execute map",
+      "params": [
+        {
+          "name": "MAP",
+          "viewName": "Map",
+          "type": "autocomplete",
+          "model": "Map",
+          "propertyName": "name"
+        },
+        {
+          "name": "VERSION",
+          "viewName": "structure Id",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "imgUrl": "logo.png"
+}

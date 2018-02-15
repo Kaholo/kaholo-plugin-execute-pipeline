@@ -1,0 +1,14 @@
+{
+  "name": "pm-plugin-execute-map",
+  "version": "1.0.0",
+  "description": "Selecting map to execute",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Productionmap team (Roy Talyosef)",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.83.0"
+  }
+}
