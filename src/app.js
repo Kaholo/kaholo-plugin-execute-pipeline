@@ -6,13 +6,15 @@ function executeMap(action) {
         let executionUrl = `${env.server_url}/api/maps/${action.params.MAP}/execute/`;
         if (action.params.VERSION) {
             executionUrl += action.params.VERSION;
+        } if (action.params.CONFIG) {
+            executionUrl += `?config=${action.params.CONFIG}`;
         }
         request.get(executionUrl, function(error, response, body) {
             if (error || response.statusCode !== 200) {
                 return reject(error);
             }
             console.log("You can view the results of the map by entering");
-            console.log(`${env.server_url}/maps/${action.params.MAP}/results`)
+            console.log(`${env.server_url}/maps/${action.params.MAP}/results`);
             return resolve(body);
         });
     });

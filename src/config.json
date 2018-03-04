@@ -1,5 +1,5 @@
 {
-  "name": "Map Executer",
+  "name": "MapExecuter",
   "type": "executer",
   "exposeRoute": false,
   "execProgram": "node",
@@ -21,6 +21,11 @@
         {
           "name": "VERSION",
           "viewName": "structure Id",
+          "type": "string"
+        },
+        {
+          "name": "CONFIG",
+          "viewName": "configuration name",
           "type": "string"
         }
       ]
