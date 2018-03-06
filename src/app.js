@@ -11,7 +11,7 @@ function executeMap(action) {
         }
         request.get(executionUrl, function(error, response, body) {
             if (error || response.statusCode !== 200) {
-                return reject(error);
+                return reject(body || error);``
             }
             console.log("You can view the results of the map by entering");
             console.log(`${env.server_url}/maps/${action.params.MAP}/results`);
@@ -33,7 +33,7 @@ function main(argv) {
         console.log(res);
         process.exit(0); // Success
     }, function(err) {
-        console.log("an error occured", err);
+        console.log("An error occurred: ", err);
         // Uncaught Fatal Exception
         // There was an uncaught exception, and it was not handled by a domain or an 'uncaughtException' event handler.
         process.exit(1); // Failure
