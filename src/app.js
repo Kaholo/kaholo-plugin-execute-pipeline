@@ -14,7 +14,7 @@ function executeMap(action) {
                 return reject(body || error);``
             }
             console.log("You can view the results of the map by entering");
-            console.log(`${env.server_url}/maps/${action.params.MAP}/results`);
+            console.log(`/maps/${action.params.MAP}/results`);
             return resolve(body);
         });
     });
