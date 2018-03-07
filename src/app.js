@@ -6,17 +6,20 @@ function executeMap(action) {
         let executionUrl = `${env.server_url}/api/maps/${action.params.MAP}/execute/`;
         if (action.params.VERSION) {
             executionUrl += action.params.VERSION;
-        } if (action.params.CONFIG) {
+        }
+        if (action.params.CONFIG) {
             executionUrl += `?config=${action.params.CONFIG}`;
         }
-        request.get(executionUrl, function(error, response, body) {
+
+        request.post(executionUrl, { form: { trigger: 'Started by map-executer plugin' } }, function (error, response, body) {
             if (error || response.statusCode !== 200) {
-                return reject(body || error);``
+                return reject(body || error);
             }
             console.log("You can view the results of the map by entering");
             console.log(`/maps/${action.params.MAP}/results`);
             return resolve(body);
         });
+
     });
 }
 
@@ -29,10 +32,10 @@ function main(argv) {
         process.exit(9);
     }
     const action = JSON.parse(argv[2]);
-    executeMap(action).then(function(res) {
+    executeMap(action).then(function (res) {
         console.log(res);
         process.exit(0); // Success
-    }, function(err) {
+    }, function (err) {
         console.log("An error occurred: ", err);
         // Uncaught Fatal Exception
         // There was an uncaught exception, and it was not handled by a domain or an 'uncaughtException' event handler.
