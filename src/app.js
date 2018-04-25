@@ -11,7 +11,12 @@ function executeMap(action) {
             executionUrl += `?config=${action.params.CONFIG}`;
         }
 
-        request.post(executionUrl, { form: { trigger: 'Started by map-executer plugin' } }, function (error, response, body) {
+        request.post(executionUrl, {
+            form: {
+                trigger: (action.params.TRIGGER || 'Started by map-executer plugin'),
+                agents: action.params.AGENTS
+            }
+        }, function (error, response, body) {
             if (error || response.statusCode !== 200) {
                 return reject(body || error);
             }

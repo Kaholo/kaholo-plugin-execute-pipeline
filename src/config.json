@@ -4,7 +4,7 @@
   "exposeRoute": false,
   "execProgram": "node",
   "main": "app.js",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Selecting map to execute",
   "methods": [
     {
@@ -26,6 +26,16 @@
         {
           "name": "CONFIG",
           "viewName": "configuration name",
+          "type": "string"
+        },
+        {
+          "name": "AGENTS",
+          "viewName": "agents (comma separated)",
+          "type": "string"
+        },
+        {
+          "name": "TRIGGER",
+          "viewName": "trigger reason",
           "type": "string"
         }
       ]
