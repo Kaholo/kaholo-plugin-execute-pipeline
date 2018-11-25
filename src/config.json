@@ -8,7 +8,7 @@
   "description": "Selecting map to execute",
   "methods": [
     {
-      "name": "EXECUTE_MAP",
+      "name": "executeMap",
       "viewName": "Execute map",
       "params": [
         {

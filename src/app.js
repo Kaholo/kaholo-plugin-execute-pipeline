@@ -28,24 +28,6 @@ function executeMap(action) {
     });
 }
 
-
-function main(argv) {
-    if (argv.length < 3) {
-        console.log('{err: "not enough parameters"}');
-        // Invalid Argument
-        // Either an unknown option was specified, or an option requiring a value was provided without a value.
-        process.exit(9);
-    }
-    const action = JSON.parse(argv[2]);
-    executeMap(action).then(function (res) {
-        console.log(res);
-        process.exit(0); // Success
-    }, function (err) {
-        console.log("An error occurred: ", err);
-        // Uncaught Fatal Exception
-        // There was an uncaught exception, and it was not handled by a domain or an 'uncaughtException' event handler.
-        process.exit(1); // Failure
-    });
+module.exports = {
+    executeMap : executeMap
 }
-
-main(process.argv);
