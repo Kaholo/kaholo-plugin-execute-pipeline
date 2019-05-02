@@ -7,7 +7,6 @@ function executeMap(action) {
         if (action.params.VERSION) {
             executionUrl += action.params.VERSION;
         }
-      
 
         request.post(executionUrl, {
             form: {
