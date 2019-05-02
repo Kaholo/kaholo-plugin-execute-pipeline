@@ -4,7 +4,7 @@
   "exposeRoute": false,
   "execProgram": "node",
   "main": "app.js",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Selecting map to execute",
   "methods": [
     {
@@ -25,7 +25,7 @@
         },
         {
           "name": "CONFIG",
-          "viewName": "configuration name",
+          "viewName": "configuration (name / object)",
           "type": "string"
         },
         {

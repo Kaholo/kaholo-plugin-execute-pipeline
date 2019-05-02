@@ -7,14 +7,12 @@ function executeMap(action) {
         if (action.params.VERSION) {
             executionUrl += action.params.VERSION;
         }
-        if (action.params.CONFIG) {
-            executionUrl += `?config=${action.params.CONFIG}`;
-        }
 
         request.post(executionUrl, {
             form: {
                 trigger: (action.params.TRIGGER || 'Started by map-executer plugin'),
-                agents: action.params.AGENTS
+                agents: action.params.AGENTS,
+                config:typeof action.params.CONFIG == "object" ? JSON.stringify(action.params.CONFIG):action.params.CONFIG
             }
         }, function (error, response, body) {
             if (error || response.statusCode !== 200) {
