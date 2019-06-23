@@ -12,6 +12,7 @@ function executeMap(action) {
             form: {
                 trigger: (action.params.TRIGGER || 'Started by map-executer plugin'),
                 agents: action.params.AGENTS,
+                mergeConfig: action.params.MERGE_CONFIG,
                 config:typeof action.params.CONFIG == "object" ? JSON.stringify(action.params.CONFIG):action.params.CONFIG
             }
         }, function (error, response, body) {

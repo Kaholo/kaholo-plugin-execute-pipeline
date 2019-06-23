@@ -29,6 +29,11 @@
           "type": "string"
         },
         {
+          "name": "MERGE_CONFIG",
+          "viewName": "merge configuration name",
+          "type": "string"
+        },
+        {
           "name": "AGENTS",
           "viewName": "agents (comma separated)",
           "type": "string"
