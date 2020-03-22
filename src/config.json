@@ -4,12 +4,12 @@
   "exposeRoute": false,
   "execProgram": "node",
   "main": "app.js",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "description": "Selecting map to execute",
   "settings":[
     {
       "name":"TOKEN",
-      "viewName":"Execute Map Token",
+      "viewName":"Token",
       "type":"vault"
     }
   ],
