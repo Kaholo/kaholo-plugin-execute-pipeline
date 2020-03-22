@@ -1,7 +1,7 @@
 const request = require("request");
 const env = require('../../../core/src/environment/environment');
 
-function executeMap(action) {
+function executeMap(action,settings) {
     return new Promise((resolve, reject) => {
         let executionUrl = `${env.server_url}/api/maps/${action.params.MAP}/execute/`;
         if (action.params.VERSION) {
@@ -14,6 +14,9 @@ function executeMap(action) {
                 agents: action.params.AGENTS,
                 mergeConfig: action.params.MERGE_CONFIG,
                 config: action.params.CONFIG
+            },
+            headers:{
+                authorization:settings.TOKEN
             },
             json : true
         }, function (error, response, body) {
