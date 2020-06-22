@@ -4,7 +4,7 @@
   "exposeRoute": false,
   "execProgram": "node",
   "main": "app.js",
-  "version": "1.5.0",
+  "version": "2.0.0",
   "description": "Selecting map to execute",
   "settings":[
     {
@@ -26,18 +26,8 @@
           "propertyName": "name"
         },
         {
-          "name": "VERSION",
-          "viewName": "structure Id",
-          "type": "string"
-        },
-        {
           "name": "CONFIG",
           "viewName": "configuration (name / object)",
-          "type": "string"
-        },
-        {
-          "name": "MERGE_CONFIG",
-          "viewName": "merge configuration name",
           "type": "string"
         },
         {
