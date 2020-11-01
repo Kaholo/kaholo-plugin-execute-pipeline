@@ -3,24 +3,22 @@ const request = require("request");
 function executeMap(action, settings) {
   const serverUrl = getServerUrl();
   return new Promise((resolve, reject) => {
-    let executionUrl = `${serverUrl}/api/maps/${action.params.MAP}/execute/`;
+    const executionUrl = `${serverUrl}/api/maps/${action.params.MAP}/execute/`;
     
-    let agents = [];
+    const body = {
+      trigger: action.params.TRIGGER || "Started by map-executer plugin",
+    }
+
     if (action.params.AGENTS) {
       if (typeof action.params.AGENTS == "string") {
-        agents = action.params.AGENTS.split(",").map((agent) => agent.trim());
+        body.agents = action.params.AGENTS.split(",").map((agent) => agent.trim());
       } else if (Array.isArray(action.params.AGENTS)) {
-        agents = action.params.AGENTS;
+        body.agents = action.params.AGENTS;
       } else {
         return reject(
           "Agents parameter must be either an Array or comma seperated list"
         );
       }
-    }
-
-    const body = {
-      trigger: action.params.TRIGGER || "Started by map-executer plugin",
-      agents: agents
     }
 
     if(action.params.CONFIG){
