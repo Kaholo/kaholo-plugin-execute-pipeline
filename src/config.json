@@ -4,7 +4,7 @@
   "exposeRoute": false,
   "execProgram": "node",
   "main": "app.js",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Selecting map to execute",
   "settings":[
     {
@@ -20,7 +20,7 @@
       "params": [
         {
           "name": "MAP",
-          "viewName": "Map",
+          "viewName": "Pipeline",
           "type": "autocomplete",
           "model": "Map",
           "propertyName": "name"
