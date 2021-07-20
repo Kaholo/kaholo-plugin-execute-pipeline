@@ -1,11 +1,11 @@
 {
-  "name": "MapExecuter",
+  "name": "Pipeline-Executer",
   "type": "executer",
   "exposeRoute": false,
   "execProgram": "node",
   "main": "app.js",
-  "version": "2.0.2",
-  "description": "Selecting map to execute",
+  "version": "1.0.0",
+  "description": "Selecting pipeline to execute",
   "settings":[
     {
       "name":"TOKEN",
@@ -15,11 +15,11 @@
   ],
   "methods": [
     {
-      "name": "executeMap",
-      "viewName": "Execute map",
+      "name": "executePipeline",
+      "viewName": "Execute Pipeline",
       "params": [
         {
-          "name": "MAP",
+          "name": "pipeline",
           "viewName": "Pipeline",
           "type": "autocomplete",
           "model": "Map",
@@ -27,17 +27,17 @@
         },
         {
           "name": "CONFIG",
-          "viewName": "configuration (name / object)",
+          "viewName": "Configuration (Name / Object)",
           "type": "string"
         },
         {
           "name": "AGENTS",
-          "viewName": "agents (comma separated)",
+          "viewName": "Agents (Comma Separated)",
           "type": "string"
         },
         {
           "name": "TRIGGER",
-          "viewName": "trigger reason",
+          "viewName": "Trigger Reason",
           "type": "string"
         }
       ]
