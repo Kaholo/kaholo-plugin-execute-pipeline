@@ -1,12 +1,12 @@
 const request = require("request");
 
-function executeMap(action, settings) {
+function executePipeline(action, settings) {
   const serverUrl = getServerUrl();
   return new Promise((resolve, reject) => {
-    const executionUrl = `${serverUrl}/api/maps/${action.params.MAP}/execute/`;
+    const executionUrl = `${serverUrl}/api/maps/${action.params.pipeline}/execute/`;
     
     const body = {
-      trigger: action.params.TRIGGER || "Started by map-executer plugin",
+      trigger: action.params.TRIGGER || "Started by Pipeline-Executer plugin",
     }
 
     if (action.params.AGENTS) {
@@ -38,8 +38,8 @@ function executeMap(action, settings) {
         if (error || response.statusCode !== 200) {
           return reject(body || error);
         }
-        console.log("You can view the results of the map by entering");
-        console.log(`/maps/${action.params.MAP}/results`);
+        console.log("You can view the results of the pipeline by entering");
+        console.log(`/maps/${action.params.pipeline}/results`);
         return resolve(body);
       }
     );
@@ -63,5 +63,5 @@ function getServerUrl() {
 }
 
 module.exports = {
-  executeMap: executeMap,
+  executePipeline,
 };
