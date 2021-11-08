@@ -4,8 +4,10 @@
   "exposeRoute": false,
   "execProgram": "node",
   "main": "app.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Selecting pipeline to execute",
+  "category": "CORE",
+  "keywords": ["execute", "pipeline", "executer", "run"],
   "settings":[
     {
       "name":"TOKEN",
@@ -23,22 +25,34 @@
           "viewName": "Pipeline",
           "type": "autocomplete",
           "model": "Map",
-          "propertyName": "name"
+          "propertyName": "name",
+          "description": "Name of the pipeline to execute.",
+          "placeholder": "pipeline_name_1",
+          "learnUrl": "https://kaholo.io/documentation/managing-the-pipeline-flow/"
         },
         {
           "name": "CONFIG",
           "viewName": "Configuration (Name / Object)",
-          "type": "string"
+          "type": "string",
+          "description": "Name the configuration that the pipeline will run with.",
+          "placeholder": "conf_1",
+          "learnUrl": "https://kaholo.io/documentation/pipeline-tabs/configurations/"
         },
         {
           "name": "AGENTS",
           "viewName": "Agents (Comma Separated)",
-          "type": "string"
+          "type": "string",
+          "description": "Specify the agents you want to run the pipeline.",
+          "placeholder": "9144c753d5da-linux, 8510c753d5da-windows",
+          "learnUrl": "https://kaholo.io/documentation/agent-installation/using-docker-recommended/"
         },
         {
           "name": "TRIGGER",
           "viewName": "Trigger Reason",
-          "type": "string"
+          "type": "text",
+          "description": "Describe a reason for triggering the execution.",
+          "placeholder": "Triggered by 'Trigger Reason'...",
+          "learnUrl": "https://kaholo.io/documentation/advanced-ways-of-executing-a-kaholo-pipeline/executing-a-kaholo-pipeline/"
         }
       ]
     }
