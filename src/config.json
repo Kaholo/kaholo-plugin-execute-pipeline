@@ -4,15 +4,21 @@
   "exposeRoute": false,
   "execProgram": "node",
   "main": "app.js",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Selecting pipeline to execute",
   "category": "CORE",
-  "keywords": ["execute", "pipeline", "executer", "run"],
-  "settings":[
+  "keywords": [
+    "execute",
+    "pipeline",
+    "executer",
+    "run"
+  ],
+  "settings": [
     {
-      "name":"TOKEN",
-      "viewName":"Token",
-      "type":"vault"
+      "name": "TOKEN",
+      "viewName": "Token",
+      "type": "vault",
+      "description": "The authentication token of the user to run this pipeline."
     }
   ],
   "methods": [
