@@ -50,6 +50,7 @@ function executePipeline(action, settings) {
  * In order to be able to support multiple agent versions (<1.3.0, >=1.3.0)
  */
 function getServerUrl() {
+  const validProtocols = ['http:','https:'];
   let server_url;
   try {
     const env = require("../../../core/src/environment/environment");
@@ -58,7 +59,15 @@ function getServerUrl() {
     server_url = process.env.SERVER_URL;
   }
 
-  if (server_url) return server_url;
+  if (server_url){
+    const url = new URL(server_url)
+    if(!validProtocols.some(protocol=>protocol==url.protocol)){
+      server_url = `http://${server_url}`;
+    }
+
+    return server_url;
+  } 
+    
   throw "Could not determine Kaholo server URL";
 }
 
