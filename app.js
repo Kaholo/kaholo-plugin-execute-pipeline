@@ -1,76 +1,50 @@
-const request = require("request");
+const { default: axios } = require("axios");
+const { bootstrap } = require("kaholo-plugin-library");
+const { getServerUrl, logToActivityLog } = require("./helpers");
 
-function executePipeline(action, settings) {
-  const serverUrl = getServerUrl();
-  return new Promise((resolve, reject) => {
-    const executionUrl = `${serverUrl}/api/maps/${action.params.pipeline}/execute/`;
-    
-    const body = {
-      trigger: action.params.TRIGGER || "Started by Pipeline-Executer plugin",
-    }
-
-    if (action.params.AGENTS) {
-      if (typeof action.params.AGENTS == "string") {
-        body.agents = action.params.AGENTS.split(",").map((agent) => agent.trim());
-      } else if (Array.isArray(action.params.AGENTS)) {
-        body.agents = action.params.AGENTS;
-      } else {
-        return reject(
-          "Agents parameter must be either an Array or comma seperated list"
-        );
-      }
-    }
-
-    if(action.params.CONFIG){
-      body.config = action.params.CONFIG
-    }
-
-    request.post(
-      executionUrl,
-      {
-        body: body,
-        headers: {
-          authorization: settings.TOKEN,
-        },
-        json: true,
-      },
-      function (error, response, body) {
-        if (error || response.statusCode !== 200) {
-          return reject(body || error);
-        }
-        console.log("You can view the results of the pipeline by entering");
-        console.log(`/maps/${action.params.pipeline}/results`);
-        return resolve(body);
-      }
-    );
-  });
-}
-
-/**
- * In order to be able to support multiple agent versions (<1.3.0, >=1.3.0)
- */
-function getServerUrl() {
-  const validProtocols = ['http:','https:'];
-  let server_url;
-  try {
-    const env = require("../../../core/src/environment/environment");
-    server_url = env.server_url;
-  } catch (err) {
-    server_url = process.env.SERVER_URL;
+async function executePipeline({
+  TRIGGER: triggerMessage,
+  CONFIG: configurationName,
+  TOKEN: authToken,
+  pipeline: pipelineId,
+}) {
+  if (!authToken) {
+    throw new Error("Authorization Token is empty! Please specify it in the plugin's settings.");
   }
 
-  if (server_url){
-    const url = new URL(server_url)
-    if(!validProtocols.some(protocol=>protocol==url.protocol)){
-      server_url = `http://${server_url}`;
-    }
+  const serverUrl = await getServerUrl();
+  const executionUrl = `${serverUrl}/api/maps/${pipelineId}/execute/`;
 
-    return server_url;
-  } 
-    
-  throw "Could not determine Kaholo server URL";
+  const requestBody = {
+    trigger: triggerMessage,
+  };
+  if (configurationName) {
+    requestBody.config = configurationName;
+  }
+
+  let serverResponse;
+  try {
+    const { data: axiosResponseData } = await axios({
+      url: executionUrl,
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+      data: requestBody,
+      json: true,
+    });
+    serverResponse = axiosResponseData;
+  } catch (error) {
+    const axiosResponseErrorMessage = error.response.data;
+    throw new Error(`Kaholo server threw an error: ${axiosResponseErrorMessage}`);
+  }
+
+  logToActivityLog("You can view the results of the pipeline by going to:");
+  logToActivityLog(`${serverUrl}/maps/${pipelineId}/results`);
+
+  return serverResponse;
 }
 
-module.exports = {
+module.exports = bootstrap({
   executePipeline,
-};
+});
