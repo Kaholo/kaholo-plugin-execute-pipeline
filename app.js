@@ -9,7 +9,7 @@ async function executePipeline({
   pipeline: pipelineId,
 }) {
   if (!authToken) {
-    throw new Error("Authorization Token is empty! Please specify it in the plugin's settings.");
+    throw new Error("Authorization Token is empty! Please specify it in the action's parameters or plugin's settings.");
   }
 
   const serverUrl = await getServerUrl();
