@@ -1,10 +1,12 @@
 {
   "name": "Pipeline-Executer",
+  "viewName": "Pipeline Executer",
   "type": "executer",
   "exposeRoute": false,
   "execProgram": "node",
   "main": "app.js",
-  "version": "1.0.3",
+  "version": "1.1.0",
+  "imgUrl": "logo.png",
   "description": "Selecting pipeline to execute",
   "category": "CORE",
   "keywords": [
@@ -17,8 +19,8 @@
     {
       "name": "TOKEN",
       "viewName": "Token",
-      "type": "vault",
-      "description": "The authentication token of the user to run this pipeline."
+      "description": "The authentication token of the user to run this pipeline.",
+      "type": "vault"
     }
   ],
   "methods": [
@@ -27,41 +29,40 @@
       "viewName": "Execute Pipeline",
       "params": [
         {
+          "name": "TOKEN",
+          "viewName": "Token",
+          "description": "The authentication token of the user to run this pipeline.",
+          "type": "vault"
+        },
+        {
           "name": "pipeline",
           "viewName": "Pipeline",
+          "description": "Name of the pipeline to execute.",
+          "placeholder": "pipeline_name_1",
+          "learnUrl": "https://kaholo.io/documentation/managing-the-pipeline-flow/",
           "type": "autocomplete",
           "model": "Map",
           "propertyName": "name",
-          "description": "Name of the pipeline to execute.",
-          "placeholder": "pipeline_name_1",
-          "learnUrl": "https://kaholo.io/documentation/managing-the-pipeline-flow/"
+          "required": true
         },
         {
           "name": "CONFIG",
-          "viewName": "Configuration (Name / Object)",
-          "type": "string",
+          "viewName": "Configuration",
           "description": "Name the configuration that the pipeline will run with.",
           "placeholder": "conf_1",
-          "learnUrl": "https://kaholo.io/documentation/pipeline-tabs/configurations/"
-        },
-        {
-          "name": "AGENTS",
-          "viewName": "Agents (Comma Separated)",
-          "type": "string",
-          "description": "Specify the agents you want to run the pipeline.",
-          "placeholder": "9144c753d5da-linux, 8510c753d5da-windows",
-          "learnUrl": "https://kaholo.io/documentation/agent-installation/using-docker-recommended/"
+          "learnUrl": "https://kaholo.io/documentation/pipeline-tabs/configurations/",
+          "type": "text"
         },
         {
           "name": "TRIGGER",
           "viewName": "Trigger Reason",
-          "type": "text",
           "description": "Describe a reason for triggering the execution.",
           "placeholder": "Triggered by 'Trigger Reason'...",
-          "learnUrl": "https://kaholo.io/documentation/advanced-ways-of-executing-a-kaholo-pipeline/executing-a-kaholo-pipeline/"
+          "learnUrl": "https://kaholo.io/documentation/advanced-ways-of-executing-a-kaholo-pipeline/executing-a-kaholo-pipeline/",
+          "type": "text",
+          "default": "Started by Pipeline-Executer plugin"
         }
       ]
     }
-  ],
-  "imgUrl": "logo.png"
+  ]
 }

@@ -1,14 +1,22 @@
 {
   "name": "kaholo-plugin-execute-pipeline",
-  "version": "1.0.0",
   "description": "Selecting pipeline to execute",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx jest .",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix"
   },
   "author": "Kaholo Team",
   "license": "ISC",
   "dependencies": {
+    "axios": "0.27.2",
+    "kaholo-plugin-library": "github:Kaholo/kaholo-plugin-library#v1.0.3",
     "request": "2.83.0"
+  },
+  "devDependencies": {
+    "eslint": "8.15.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-plugin-import": "2.26.0"
   }
 }
