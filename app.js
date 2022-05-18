@@ -39,8 +39,7 @@ async function executePipeline({
     throw new Error(`Kaholo server threw an error: ${axiosResponseErrorMessage}`);
   }
 
-  logToActivityLog("You can view the results of the pipeline by going to:");
-  logToActivityLog(`${serverUrl}/maps/${pipelineId}/results`);
+  logToActivityLog(`You can view the results of the pipeline by going to: ${serverUrl}/maps/${pipelineId}/results`);
 
   return serverResponse;
 }
