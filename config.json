@@ -1,19 +1,19 @@
 {
   "name": "Pipeline-Executer",
-  "viewName": "Pipeline Executer",
+  "viewName": "Kaholo Pipeline Executer",
   "type": "executer",
   "exposeRoute": false,
   "execProgram": "node",
   "main": "app.js",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "imgUrl": "logo.png",
-  "description": "Selecting pipeline to execute",
-  "category": "CORE",
+  "description": "Used to Trigger Kaholo Pipelines from Other Kaholo Pipelines",
+  "category": "CI/CD",
   "keywords": [
-    "execute",
-    "pipeline",
     "executer",
-    "run"
+    "pipeline",
+    "trigger",
+    "kaholo"
   ],
   "settings": [
     {
