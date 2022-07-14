@@ -1,12 +1,20 @@
 const { default: axios } = require("axios");
-const { bootstrap } = require("kaholo-plugin-library");
-const { getServerUrl, logToActivityLog } = require("./helpers");
+const { bootstrap } = require("@kaholo/plugin-library");
+
+const {
+  getServerUrl,
+  logToActivityLog,
+  parseExecutionInputs,
+  waitForExecutionEnd,
+} = require("./helpers");
 
 async function executePipeline({
   TRIGGER: triggerMessage,
   CONFIG: configurationName,
   TOKEN: authToken,
   pipeline: pipelineId,
+  executionInputs,
+  waitUntilPipelineEnds,
 }) {
   if (!authToken) {
     throw new Error("Authorization Token is empty! Please specify it in the action's parameters or plugin's settings.");
@@ -21,10 +29,13 @@ async function executePipeline({
   if (configurationName) {
     requestBody.config = configurationName;
   }
+  if (executionInputs) {
+    requestBody.inputs = parseExecutionInputs(executionInputs);
+  }
 
-  let serverResponse;
+  let executionDetails;
   try {
-    const { data: axiosResponseData } = await axios({
+    const { data } = await axios({
       url: executionUrl,
       method: "POST",
       headers: {
@@ -33,15 +44,22 @@ async function executePipeline({
       data: requestBody,
       json: true,
     });
-    serverResponse = axiosResponseData;
+    executionDetails = data;
   } catch (error) {
-    const axiosResponseErrorMessage = error.response.data;
-    throw new Error(`Kaholo server threw an error: ${axiosResponseErrorMessage}`);
+    throw new Error(`Kaholo server threw an error: ${error.response.data}`);
   }
 
-  logToActivityLog(`You can view the results of the pipeline by going to: ${serverUrl}/maps/${pipelineId}/results`);
+  if (waitUntilPipelineEnds) {
+    await waitForExecutionEnd({
+      runId: executionDetails.runId,
+      pipelineId,
+      authToken,
+    });
+  }
 
-  return serverResponse;
+  logToActivityLog(`You can view the results of the execution at: ${serverUrl}/maps/${pipelineId}/results`);
+
+  return executionDetails;
 }
 
 module.exports = bootstrap({
