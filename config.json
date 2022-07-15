@@ -61,6 +61,20 @@
           "learnUrl": "https://kaholo.io/documentation/advanced-ways-of-executing-a-kaholo-pipeline/executing-a-kaholo-pipeline/",
           "type": "text",
           "default": "Started by Pipeline-Executer plugin"
+        },
+        {
+          "name": "executionInputs",
+          "viewName": "Execution Inputs",
+          "description": "Pass key-value pair as Kaholo Execution Inputs.",
+          "placeholder": "DEV=true\nMSG=Hello world!",
+          "type": "text",
+          "parserType": "keyValuePairs"
+        },
+        {
+          "name": "waitUntilPipelineEnds",
+          "viewName": "Wait Until Pipeline Ends",
+          "description": "Wait for the executed pipeline to finish.",
+          "type": "boolean"
         }
       ]
     }
