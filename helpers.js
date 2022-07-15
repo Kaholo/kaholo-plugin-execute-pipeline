@@ -1,6 +1,6 @@
 const { default: axios } = require("axios");
 
-const WAIT_INTERVAL_TIME = 5000;
+const WAIT_INTERVAL = 5000;
 const STATUS_DONE = "done";
 const AGENT_ENVIRONMENT_VARIABLES_PATH = "../../../core/src/environment/environment";
 
@@ -62,13 +62,13 @@ async function waitForExecutionEnd({
     return status;
   }
 
-  await delay(WAIT_INTERVAL_TIME);
+  await delay(WAIT_INTERVAL);
   return waitForExecutionEnd({ pipelineId, runId, authToken });
 }
 
 function delay(delayTime) {
-  return new Promise((res) => {
-    setTimeout(res, delayTime);
+  return new Promise((resolve) => {
+    setTimeout(resolve, delayTime);
   });
 }
 
