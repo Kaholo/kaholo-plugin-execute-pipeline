@@ -67,7 +67,8 @@
           "viewName": "Execution Inputs",
           "description": "Pass key-value pair as Kaholo Execution Inputs.",
           "placeholder": "DEV=true\nMSG=Hello world!",
-          "type": "text"
+          "type": "text",
+          "parserType": "keyValuePairs"
         },
         {
           "name": "waitUntilPipelineEnds",

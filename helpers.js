@@ -1,5 +1,4 @@
 const { default: axios } = require("axios");
-const _ = require("lodash");
 
 const WAIT_INTERVAL_TIME = 5000;
 const STATUS_DONE = "done";
@@ -34,21 +33,6 @@ function logToActivityLog(message) {
   // does not print messages to Activity Log
   // Jira ticket: https://kaholo.atlassian.net/browse/KAH-3636
   console.error(message);
-}
-
-function parseExecutionInputs(executionInputs) {
-  if (_.isPlainObject(executionInputs)) {
-    return executionInputs;
-  }
-
-  return Object.fromEntries(
-    executionInputs
-      .split("\n")
-      .map((inputLine) => {
-        const [key, ...rest] = inputLine.split("=");
-        return [key, rest.join("=")];
-      }),
-  );
 }
 
 async function waitForExecutionEnd({
@@ -91,6 +75,5 @@ function delay(delayTime) {
 module.exports = {
   getServerUrl,
   logToActivityLog,
-  parseExecutionInputs,
   waitForExecutionEnd,
 };

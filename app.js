@@ -4,7 +4,6 @@ const { bootstrap } = require("@kaholo/plugin-library");
 const {
   getServerUrl,
   logToActivityLog,
-  parseExecutionInputs,
   waitForExecutionEnd,
 } = require("./helpers");
 
@@ -30,7 +29,7 @@ async function executePipeline({
     requestBody.config = configurationName;
   }
   if (executionInputs) {
-    requestBody.inputs = parseExecutionInputs(executionInputs);
+    requestBody.inputs = executionInputs;
   }
 
   let executionDetails;
