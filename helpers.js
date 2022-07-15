@@ -1,3 +1,7 @@
+const { default: axios } = require("axios");
+
+const WAIT_INTERVAL = 5000;
+const STATUS_DONE = "done";
 const AGENT_ENVIRONMENT_VARIABLES_PATH = "../../../core/src/environment/environment";
 
 async function getServerUrl() {
@@ -31,7 +35,45 @@ function logToActivityLog(message) {
   console.error(message);
 }
 
+async function waitForExecutionEnd({
+  pipelineId,
+  runId,
+  authToken,
+}) {
+  const serverUrl = await getServerUrl();
+  const apiUrl = `${serverUrl}/api/maps/${pipelineId}/results/${runId}/`;
+
+  let status;
+  try {
+    const { data } = await axios({
+      url: apiUrl,
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+      json: true,
+    });
+    status = data.status;
+  } catch (error) {
+    throw new Error(`Kaholo server threw an error: ${error.response.data}`);
+  }
+
+  if (status === STATUS_DONE) {
+    return status;
+  }
+
+  await delay(WAIT_INTERVAL);
+  return waitForExecutionEnd({ pipelineId, runId, authToken });
+}
+
+function delay(delayTime) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delayTime);
+  });
+}
+
 module.exports = {
   getServerUrl,
   logToActivityLog,
+  waitForExecutionEnd,
 };
