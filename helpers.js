@@ -43,7 +43,7 @@ async function waitForExecutionEnd({
   const serverUrl = await getServerUrl();
   const apiUrl = `${serverUrl}/api/maps/${pipelineId}/results/${runId}/`;
 
-  let status;
+  let pipelineResults;
   try {
     const { data } = await axios({
       url: apiUrl,
@@ -53,13 +53,17 @@ async function waitForExecutionEnd({
       },
       json: true,
     });
-    status = data.status;
+    pipelineResults = data;
   } catch (error) {
     throw new Error(`Kaholo server threw an error: ${error.response.data}`);
   }
 
-  if (status === STATUS_DONE) {
-    return status;
+  if (pipelineResults.status === STATUS_DONE) {
+    const actions = pipelineResults
+      .agentResult
+      .processes
+      .reduce((acc, cur) => [...acc, ...cur.actions], []);
+    return { actions };
   }
 
   await delay(WAIT_INTERVAL);
