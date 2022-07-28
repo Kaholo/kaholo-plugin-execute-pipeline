@@ -49,7 +49,7 @@ async function executePipeline({
   }
 
   if (waitUntilPipelineEnds) {
-    await waitForExecutionEnd({
+    return waitForExecutionEnd({
       runId: executionDetails.runId,
       pipelineId,
       authToken,
