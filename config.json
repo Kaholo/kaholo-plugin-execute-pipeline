@@ -5,7 +5,7 @@
   "exposeRoute": false,
   "execProgram": "node",
   "main": "app.js",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "imgUrl": "logo.png",
   "description": "Used to trigger Kaholo pipelines from other Kaholo pipelines",
   "category": "CI/CD",
@@ -51,7 +51,8 @@
           "description": "Name of the configuration the pipeline will run with",
           "placeholder": "conf_1",
           "learnUrl": "https://kaholo.io/documentation/pipeline-tabs/configurations/",
-          "type": "text"
+          "type": "text",
+          "parserType": "keyValuePairs"
         },
         {
           "name": "TRIGGER",
