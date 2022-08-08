@@ -48,7 +48,7 @@
         {
           "name": "CONFIG",
           "viewName": "Configuration",
-          "description": "Name of the configuration the pipeline will run with",
+          "description": "Name of the configuration or the configuration object the pipeline will run with",
           "placeholder": "conf_1",
           "learnUrl": "https://kaholo.io/documentation/pipeline-tabs/configurations/",
           "type": "text"
