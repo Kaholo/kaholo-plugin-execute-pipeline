@@ -41,7 +41,7 @@
           "placeholder": "pipeline_name_1",
           "learnUrl": "https://kaholo.io/documentation/managing-the-pipeline-flow/",
           "type": "autocomplete",
-          "model": "Map",
+          "model": "Pipeline",
           "propertyName": "name",
           "required": true
         },
