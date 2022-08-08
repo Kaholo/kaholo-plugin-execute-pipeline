@@ -51,8 +51,7 @@
           "description": "Name of the configuration the pipeline will run with",
           "placeholder": "conf_1",
           "learnUrl": "https://kaholo.io/documentation/pipeline-tabs/configurations/",
-          "type": "text",
-          "parserType": "keyValuePairs"
+          "type": "text"
         },
         {
           "name": "TRIGGER",

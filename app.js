@@ -5,11 +5,12 @@ const {
   getServerUrl,
   logToActivityLog,
   waitForExecutionEnd,
+  parseConfigParam,
 } = require("./helpers");
 
 async function executePipeline({
   TRIGGER: triggerMessage,
-  CONFIG: configurationName,
+  CONFIG: config,
   TOKEN: authToken,
   pipeline: pipelineId,
   executionInputs,
@@ -25,8 +26,8 @@ async function executePipeline({
   const requestBody = {
     trigger: triggerMessage,
   };
-  if (configurationName) {
-    requestBody.config = configurationName;
+  if (config) {
+    requestBody.config = parseConfigParam(config);
   }
   if (executionInputs) {
     requestBody.inputs = executionInputs;
