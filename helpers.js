@@ -1,5 +1,4 @@
 const { default: axios } = require("axios");
-const _ = require("lodash");
 
 const WAIT_INTERVAL = 5000;
 const STATUS_DONE = "done";
@@ -77,25 +76,8 @@ function delay(delayTime) {
   });
 }
 
-function parseConfigParam(configParamValue) {
-  if (_.isPlainObject(configParamValue)) {
-    return configParamValue;
-  }
-  if (_.isString(configParamValue)) {
-    try {
-      // If the config value is string try to parse it
-      return JSON.parse(configParamValue);
-    } catch {
-      // If the value is not in JSON format, assume it's a config's name
-      return configParamValue;
-    }
-  }
-  throw new Error(`Invalid Configuration parameter value: ${configParamValue}`);
-}
-
 module.exports = {
   getServerUrl,
   logToActivityLog,
   waitForExecutionEnd,
-  parseConfigParam,
 };

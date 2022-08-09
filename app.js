@@ -5,12 +5,12 @@ const {
   getServerUrl,
   logToActivityLog,
   waitForExecutionEnd,
-  parseConfigParam,
 } = require("./helpers");
 
 async function executePipeline({
   TRIGGER: triggerMessage,
-  CONFIG: config,
+  CONFIG: configName,
+  configObject,
   TOKEN: authToken,
   pipeline: pipelineId,
   executionInputs,
@@ -19,6 +19,9 @@ async function executePipeline({
   if (!authToken) {
     throw new Error("Authorization Token is empty! Please specify it in the action's parameters or plugin's settings.");
   }
+  if (configName && configObject) {
+    throw new Error("Configuration Name and Configuration Object can't be provided together at the same time.");
+  }
 
   const serverUrl = await getServerUrl();
   const executionUrl = `${serverUrl}/api/maps/${pipelineId}/execute/`;
@@ -26,8 +29,10 @@ async function executePipeline({
   const requestBody = {
     trigger: triggerMessage,
   };
-  if (config) {
-    requestBody.config = parseConfigParam(config);
+  if (configName) {
+    requestBody.config = configName;
+  } else if (configObject) {
+    requestBody.config = configObject;
   }
   if (executionInputs) {
     requestBody.inputs = executionInputs;

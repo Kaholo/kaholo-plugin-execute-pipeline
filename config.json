@@ -47,11 +47,19 @@
         },
         {
           "name": "CONFIG",
-          "viewName": "Configuration",
-          "description": "Name of the configuration or the configuration object the pipeline will run with",
+          "viewName": "Configuration Name",
+          "description": "Name of the configuration the pipeline will run with. Leave this empty if Configuration Object is specified",
           "placeholder": "conf_1",
           "learnUrl": "https://kaholo.io/documentation/pipeline-tabs/configurations/",
-          "type": "text"
+          "type": "string"
+        },
+        {
+          "name": "configObject",
+          "viewName": "Configuration Object",
+          "description": "Configuration object which will be used in the execution. Leave this empty if Configuration Name is specified",
+          "placeholder": "{\"message\":\"hello world!\"}",
+          "type": "text",
+          "parserType": "object"
         },
         {
           "name": "TRIGGER",
