@@ -9,7 +9,8 @@ const {
 
 async function executePipeline({
   TRIGGER: triggerMessage,
-  CONFIG: configurationName,
+  CONFIG: configName,
+  configObject,
   TOKEN: authToken,
   pipeline: pipelineId,
   executionInputs,
@@ -18,6 +19,9 @@ async function executePipeline({
   if (!authToken) {
     throw new Error("Authorization Token is empty! Please specify it in the action's parameters or plugin's settings.");
   }
+  if (configName && configObject) {
+    throw new Error("Configuration Name and Configuration Object can't be provided together at the same time.");
+  }
 
   const serverUrl = await getServerUrl();
   const executionUrl = `${serverUrl}/api/maps/${pipelineId}/execute/`;
@@ -25,8 +29,10 @@ async function executePipeline({
   const requestBody = {
     trigger: triggerMessage,
   };
-  if (configurationName) {
-    requestBody.config = configurationName;
+  if (configName) {
+    requestBody.config = configName;
+  } else if (configObject) {
+    requestBody.config = configObject;
   }
   if (executionInputs) {
     requestBody.inputs = executionInputs;
