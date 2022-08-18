@@ -21,7 +21,7 @@
       {
         "name": "authToken",
         "viewName": "Default Token",
-        "description": "Access Token of Kaholo Service Account to use by default",
+        "description": "Access Token of Kaholo Service Account",
         "type": "vault"
       }
     ]
