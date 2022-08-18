@@ -15,27 +15,24 @@
     "trigger",
     "kaholo"
   ],
-  "settings": [
-    {
-      "name": "TOKEN",
-      "viewName": "Default Token",
-      "description": "Access Token of Kaholo Service Account to use by default",
-      "type": "vault"
-    }
-  ],
+  "auth": {
+    "authId": "kaholoAccount",
+    "params": [
+      {
+        "name": "authToken",
+        "viewName": "Default Token",
+        "description": "Access Token of Kaholo Service Account",
+        "type": "vault"
+      }
+    ]
+  },
   "methods": [
     {
       "name": "executePipeline",
       "viewName": "Execute Pipeline",
       "params": [
         {
-          "name": "TOKEN",
-          "viewName": "Token",
-          "description": "Access Token of Kaholo Service Account",
-          "type": "vault"
-        },
-        {
-          "name": "pipeline",
+          "name": "pipelineId",
           "viewName": "Pipeline",
           "description": "Name of Kaholo pipeline to trigger",
           "placeholder": "pipeline_name_1",
@@ -46,7 +43,7 @@
           "required": true
         },
         {
-          "name": "CONFIG",
+          "name": "configName",
           "viewName": "Configuration Name",
           "description": "Name of the configuration the pipeline will run with. Leave this empty if Configuration Object is specified",
           "placeholder": "conf_1",
@@ -62,7 +59,7 @@
           "parserType": "object"
         },
         {
-          "name": "TRIGGER",
+          "name": "triggerMessage",
           "viewName": "Trigger Reason",
           "description": "Description of reason for triggering the execution",
           "placeholder": "Triggered by 'Trigger Reason'...",
