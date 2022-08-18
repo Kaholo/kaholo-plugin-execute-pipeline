@@ -7,15 +7,17 @@ const {
   waitForExecutionEnd,
 } = require("./helpers");
 
-async function executePipeline({
-  TRIGGER: triggerMessage,
-  CONFIG: configName,
-  configObject,
-  TOKEN: authToken,
-  pipeline: pipelineId,
-  executionInputs,
-  waitUntilPipelineEnds,
-}) {
+async function executePipeline(params) {
+  const {
+    triggerMessage,
+    configName,
+    configObject,
+    pipelineId,
+    authToken,
+    executionInputs,
+    waitUntilPipelineEnds,
+  } = params;
+
   if (!authToken) {
     throw new Error("Authorization Token is empty! Please specify it in the action's parameters or plugin's settings.");
   }
