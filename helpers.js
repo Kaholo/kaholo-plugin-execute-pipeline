@@ -1,8 +1,11 @@
 const { default: axios } = require("axios");
 
-const WAIT_INTERVAL = 5000;
-const STATUS_DONE = "done";
+const DEFAULT_INTERVAL = 5000;
 const AGENT_ENVIRONMENT_VARIABLES_PATH = "../../../core/src/environment/environment";
+const Status = {
+  PENDING: "pending",
+  RUNNING: "running",
+};
 
 async function getServerUrl() {
   let serverUrl;
@@ -10,7 +13,7 @@ async function getServerUrl() {
     // Support for agent version <1.3.0
     const environmentVariables = await import(AGENT_ENVIRONMENT_VARIABLES_PATH);
     serverUrl = environmentVariables.server_url;
-  } catch (err) {
+  } catch {
     // Support for agent version >=1.3.0
     serverUrl = process.env.SERVER_URL;
   }
@@ -58,15 +61,23 @@ async function waitForExecutionEnd({
     throw new Error(`Kaholo server threw an error: ${error.response.data}`);
   }
 
-  if (pipelineResults.status === STATUS_DONE) {
-    const actions = pipelineResults
-      .agentResult
-      .processes
-      .reduce((acc, cur) => [...acc, ...cur.actions], []);
-    return { actions };
+  logToActivityLog(pipelineResults.status);
+
+  if (
+    pipelineResults.status !== Status.PENDING
+    && pipelineResults.status !== Status.RUNNING
+  ) {
+    return {
+      actions: pipelineResults
+        .agentResult
+        .processes
+        .reduce((acc, cur) => [...acc, ...cur.actions], []),
+      status: pipelineResults.status,
+      details: pipelineResults,
+    };
   }
 
-  await delay(WAIT_INTERVAL);
+  await delay(DEFAULT_INTERVAL);
   return waitForExecutionEnd({ pipelineId, runId, authToken });
 }
 
