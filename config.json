@@ -5,7 +5,7 @@
   "exposeRoute": false,
   "execProgram": "node",
   "main": "app.js",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "imgUrl": "logo.png",
   "description": "Used to trigger Kaholo pipelines from other Kaholo pipelines",
   "category": "CI/CD",
@@ -20,8 +20,8 @@
     "params": [
       {
         "name": "authToken",
-        "viewName": "Default Token",
-        "description": "Access Token of Kaholo Service Account",
+        "viewName": "Service Account Token",
+        "description": "Access Token of Kaholo Service Account with permissions to execute pipeline(s)",
         "type": "vault"
       }
     ]
