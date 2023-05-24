@@ -64,7 +64,8 @@ async function executePipeline(params) {
     });
   }
 
-  logToActivityLog(`You can view the results of the execution at: ${serverUrl}/maps/${pipelineId}/results`);
+  // Removing because serverUrl evaluates to http://platform:8090 and this plugin soon to be deprecated anyway
+  // logToActivityLog(`You can view the results of the execution at: ${serverUrl}/maps/${pipelineId}/results`);
 
   return executionDetails;
 }
