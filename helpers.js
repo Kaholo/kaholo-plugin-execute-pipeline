@@ -5,6 +5,8 @@ const AGENT_ENVIRONMENT_VARIABLES_PATH = "../../../core/src/environment/environm
 const Status = {
   PENDING: "pending",
   RUNNING: "running",
+  DONE: "done",
+  ERROR: "error",
 };
 
 async function getServerUrl() {
@@ -67,7 +69,7 @@ async function waitForExecutionEnd({
     pipelineResults.status !== Status.PENDING
     && pipelineResults.status !== Status.RUNNING
   ) {
-    return {
+    const result = {
       actions: pipelineResults
         .agentResult
         .processes
@@ -75,6 +77,10 @@ async function waitForExecutionEnd({
       status: pipelineResults.status,
       details: pipelineResults,
     };
+    if(result.status !== Status.DONE) {
+      throw result;
+    }
+    return result;
   }
 
   await delay(DEFAULT_INTERVAL);
