@@ -56,6 +56,8 @@ async function executePipeline(params) {
     throw new Error(`Kaholo server threw an error: ${error.response.data}`);
   }
 
+  logToActivityLog(`You can view the results of the execution at: ${serverUrl}/maps/${pipelineId}/results`);
+
   if (waitUntilPipelineEnds) {
     return waitForExecutionEnd({
       runId: executionDetails.runId,
@@ -63,9 +65,6 @@ async function executePipeline(params) {
       authToken,
     });
   }
-
-  // Removing because serverUrl evaluates to http://platform:8090 and this plugin soon to be deprecated anyway
-  // logToActivityLog(`You can view the results of the execution at: ${serverUrl}/maps/${pipelineId}/results`);
 
   return executionDetails;
 }
