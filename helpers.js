@@ -77,7 +77,7 @@ async function waitForExecutionEnd({
       status: pipelineResults.status,
       details: pipelineResults,
     };
-    if(result.status !== Status.DONE) {
+    if (result.status !== Status.DONE) {
       throw result;
     }
     return result;
