@@ -5,7 +5,7 @@
   "exposeRoute": false,
   "execProgram": "node",
   "main": "app.js",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "imgUrl": "logo.png",
   "description": "Used to trigger Kaholo pipelines from other Kaholo pipelines",
   "category": "CI/CD",
