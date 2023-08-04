@@ -32,14 +32,6 @@ async function getServerUrl() {
   return serverUrl;
 }
 
-function logToActivityLog(message) {
-  // TODO: Change console.error to console.info
-  // Right now (Kaholo v4.2.3-1) console.info
-  // does not print messages to Activity Log
-  // Jira ticket: https://kaholo.atlassian.net/browse/KAH-3636
-  console.error(message);
-}
-
 async function waitForExecutionEnd({
   pipelineId,
   runId,
@@ -63,7 +55,7 @@ async function waitForExecutionEnd({
     throw new Error(`Kaholo server threw an error: ${error.response.data}`);
   }
 
-  logToActivityLog(pipelineResults.status);
+  console.info(pipelineResults.status);
 
   if (
     pipelineResults.status !== Status.PENDING
@@ -95,6 +87,5 @@ function delay(delayTime) {
 
 module.exports = {
   getServerUrl,
-  logToActivityLog,
   waitForExecutionEnd,
 };
