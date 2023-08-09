@@ -3,7 +3,6 @@ const { bootstrap } = require("@kaholo/plugin-library");
 
 const {
   getServerUrl,
-  logToActivityLog,
   waitForExecutionEnd,
 } = require("./helpers");
 
@@ -56,7 +55,7 @@ async function executePipeline(params) {
     throw new Error(`Kaholo server threw an error: ${error.response.data}`);
   }
 
-  logToActivityLog(`You can view the results of the execution at: ${serverUrl}/maps/${pipelineId}/results`);
+  console.info(`You can view the results of the execution at: ${serverUrl}/maps/${pipelineId}/results`);
 
   if (waitUntilPipelineEnds) {
     return waitForExecutionEnd({
