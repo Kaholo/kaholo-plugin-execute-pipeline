@@ -55,7 +55,7 @@ async function executePipeline(params) {
     throw new Error(`Kaholo server threw an error: ${error.response.data}`);
   }
 
-  console.info(`You can view the results of the execution at: ${serverUrl}/maps/${pipelineId}/results`);
+  console.info(`The results of the execution can be viewed <a href=${serverUrl}/maps/${pipelineId}/results target="_blank">HERE</a>.`);
 
   if (waitUntilPipelineEnds) {
     return waitForExecutionEnd({
