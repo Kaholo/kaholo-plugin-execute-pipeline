@@ -36,9 +36,15 @@ async function waitForExecutionEnd({
   pipelineId,
   runId,
   authToken,
+  firstPass = true,
 }) {
   const serverUrl = await getServerUrl();
   const apiUrl = `${serverUrl}/api/maps/${pipelineId}/results/${runId}/`;
+
+  if (firstPass) {
+    const runLink = `${serverUrl}/maps/${pipelineId}/results/${runId}`;
+    console.info(`Execution results can be viewed here:\n<a href=${runLink} target="_blank">${runLink}</a>\n`);
+  }
 
   let pipelineResults;
   try {
@@ -76,7 +82,9 @@ async function waitForExecutionEnd({
   }
 
   await delay(DEFAULT_INTERVAL);
-  return waitForExecutionEnd({ pipelineId, runId, authToken });
+  return waitForExecutionEnd({
+    pipelineId, runId, authToken, firstPass: false,
+  });
 }
 
 function delay(delayTime) {
