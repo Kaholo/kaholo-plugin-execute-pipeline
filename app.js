@@ -55,8 +55,6 @@ async function executePipeline(params) {
     throw new Error(`Kaholo server threw an error: ${error.response.data}`);
   }
 
-  console.info(`The results of the execution can be viewed <a href=${serverUrl}/maps/${pipelineId}/results target="_blank">HERE</a>.`);
-
   if (waitUntilPipelineEnds) {
     return waitForExecutionEnd({
       runId: executionDetails.runId,
@@ -64,6 +62,9 @@ async function executePipeline(params) {
       authToken,
     });
   }
+
+  const runLink = `${serverUrl}/maps/${pipelineId}/results/${executionDetails.runId}`;
+  console.info(`Execution results can be viewed here:\n<a href=${runLink} target="_blank">${runLink}</a>\n`);
 
   return executionDetails;
 }
