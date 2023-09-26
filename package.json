@@ -1,6 +1,6 @@
 {
   "name": "kaholo-plugin-execute-pipeline",
-  "description": "Selecting pipeline to execute",
+  "description": "Trigger Kaholo pipelines from other Kaholo pipelines",
   "main": "app.js",
   "scripts": {
     "test": "npx jest .",
