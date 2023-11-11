@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@kaholo/plugin-library": "^2.3.2",
-    "axios": "0.27.2"
+    "axios": "1.6.0"
   },
   "devDependencies": {
     "eslint": "8.15.0",
